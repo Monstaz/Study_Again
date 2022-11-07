@@ -30,6 +30,8 @@ def show_scoreboard():
 def menu():
     choice = input("Menu:\n1 - Start Game\n2 - Exit\n3 - Scoreboard\n")
     if choice == '1':
+        global player_name
+        player_name = input("Enter your name: ")
         deck()
     elif choice == '2':
         input("Good bye!\nPress any button")
@@ -45,23 +47,23 @@ def menu():
 
 
 def deck():
-    num_decks = ''
-
-    while num_decks <= '0' or num_decks >= '5':
-        num_decks = input("How many decks will be shuffled?\nChoose from 1 to 4\n")
-
-    start_deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11] * 4
-    game_deck = start_deck * int(num_decks)
-    random.shuffle(game_deck)
-    random.shuffle(game_deck)
-    cls()
-    game(game_deck, 100)
+    decks_in_shuffle = random.randint(2, 8)
+    basic_deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11] * 4
+    game_deck = basic_deck * decks_in_shuffle
+    start_game_deck = game_deck.copy()
+    for i in range(5):
+        random.shuffle(game_deck)
+    game(game_deck, 100, start_game_deck)
 
 
-def game(game_deck, player_cash):
+def game(game_deck, player_cash, start_game_deck):
     lose = 0
     bet = 0
-    player_name = input("Enter your name: ")
+    print(game_deck)
+    print(start_game_deck)
+    print(len(game_deck), len(start_game_deck))
+    if len(game_deck) < len(start_game_deck) / 2:
+        game(start_game_deck, player_cash, start_game_deck)
 
     while True:
         try:
@@ -101,7 +103,7 @@ def game(game_deck, player_cash):
             player_info = f"Your card:{game_deck[0]}\nYour points:{hand}"
             if hand > 21:
                 player_cash -= bet
-                print(f"\n{player_info}You bust!\nYour cash is:{player_cash}")
+                print(f"\n{player_info} you bust!\nYour cash is:{player_cash}")
                 lose = 1
                 break
             print(player_info)
@@ -135,7 +137,7 @@ def game(game_deck, player_cash):
         retry = input("\nWant to play again?\n1 - Yes\n2 - Back to menu\n")
         if retry == '1':
             cls()
-            game(game_deck, player_cash)
+            game(game_deck, player_cash, start_game_deck)
         elif retry == '2':
             input(f"Thanks for playing!\nYour cash is {player_cash}\nGood luck!\nPress any button to continue")
             save_to_file(player_name, player_cash)
