@@ -35,6 +35,7 @@ def menu():
         input("Good bye!\nPress any button")
         sys.exit()
     elif choice == '3':
+        cls()
         show_scoreboard()
         input("Press any button to continue... ")
         menu()
