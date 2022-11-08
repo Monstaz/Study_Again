@@ -11,11 +11,11 @@ def cls():
 
 def save_to_file(name, score):
     with open('Scoreboard.json', 'r') as file_read:
-        lis = json.load(file_read)
-    lis.append(name)
-    lis.append(score)
+        score_list = json.load(file_read)
+    score_list.append(name)
+    score_list.append(score)
     with open('Scoreboard.json', 'w') as file_write:
-        json.dump(lis, file_write)
+        json.dump(score_list, file_write)
 
 
 def show_scoreboard():
@@ -48,10 +48,9 @@ def menu():
 
 def deck():
     decks_in_shuffle = random.randint(2, 8)
-    basic_deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11] * 4
-    game_deck = basic_deck * decks_in_shuffle
+    game_deck = ([2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11] * 4) * decks_in_shuffle
     start_game_deck = game_deck.copy()
-    for i in range(5):
+    for count in range(5):
         random.shuffle(game_deck)
     game(game_deck, 100, start_game_deck)
 
@@ -59,7 +58,8 @@ def deck():
 def game(game_deck, player_cash, start_game_deck):
     lose = 0
     bet = 0
-
+    # Check that current decks is bigger than started deck
+    # If so refresh it
     if len(game_deck) < len(start_game_deck) / 2:
         game(start_game_deck, player_cash, start_game_deck)
 
@@ -89,12 +89,14 @@ def game(game_deck, player_cash, start_game_deck):
     while hand != 21:
         action = input("\n1 - Hit\n2 - Stop\n")
         cls()
+        print(game_deck)
         if action == '1':
             hand += game_deck[0]
             if game_deck[0] == 11 and hand > 21:
                 hand -= 10
             if hand == 21:
-                print("Congrats! 21 points!\nWait dealer...")
+                print(f"Your card: {game_deck[0]}\nCongrats! 21 points!\nWait dealer...")
+                game_deck.pop(0)
                 break
             player_info = f"Your card:{game_deck.pop(0)}\nYour points:{hand}"
             if hand > 21:
