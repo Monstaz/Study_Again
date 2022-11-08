@@ -59,16 +59,14 @@ def deck():
 def game(game_deck, player_cash, start_game_deck):
     lose = 0
     bet = 0
-    print(game_deck)
-    print(start_game_deck)
-    print(len(game_deck), len(start_game_deck))
+
     if len(game_deck) < len(start_game_deck) / 2:
         game(start_game_deck, player_cash, start_game_deck)
 
     while True:
         try:
-            bet = int(input("Choose the bet(From 5 to 20): "))
-            if 5 <= bet <= 20:
+            bet = int(input("Choose the bet(From 5 to 25): "))
+            if 5 <= bet <= 25:
                 cls()
                 break
             else:
@@ -80,12 +78,10 @@ def game(game_deck, player_cash, start_game_deck):
     dealer_hand = game_deck.pop(0)
     print(f"Dealer's open hand:{dealer_hand}\n")
     hand = game_deck[0] + game_deck[1]
-    print(f"Your cards: {game_deck[0]} and {game_deck[1]}\nTotal:{hand}")
-    del game_deck[0:2]
+    print(f"Your cards: {game_deck.pop(0)} and {game_deck.pop(0)}\nTotal:{hand}")
 
     if hand == 21:
         print("BlackJack! Now wait dealer.\n")
-
     elif hand == 22:
         hand = 12
         print(f"Your points:{hand}")
@@ -100,14 +96,13 @@ def game(game_deck, player_cash, start_game_deck):
             if hand == 21:
                 print("Congrats! 21 points!\nWait dealer...")
                 break
-            player_info = f"Your card:{game_deck[0]}\nYour points:{hand}"
+            player_info = f"Your card:{game_deck.pop(0)}\nYour points:{hand}"
             if hand > 21:
                 player_cash -= bet
                 print(f"\n{player_info} you bust!\nYour cash is:{player_cash}")
                 lose = 1
                 break
             print(player_info)
-            del game_deck[0]
         elif action == '2':
             break
 
@@ -116,14 +111,12 @@ def game(game_deck, player_cash, start_game_deck):
             dealer_hand += game_deck[0]
             if game_deck[0] == 11 and dealer_hand >= 21:
                 dealer_hand -= 10
-            print(f"Dealer's card:{game_deck[0]}\nDealer's score:{dealer_hand}\n")
-            del game_deck[0]
+            print(f"Dealer's card:{game_deck.pop(0)}\nDealer's score:{dealer_hand}\n")
         result_info = f"Your score:{hand}\nDealer's score:{dealer_hand}\n"
         if hand < dealer_hand <= 21:
             player_cash -= bet
             print(result_info + f"\nYou Lose!\nNow your cash:{player_cash}")
         elif dealer_hand == hand:
-            player_cash += bet
             print(result_info + f"\nDraw!\nNow your cash:{player_cash}")
         elif dealer_hand < hand or dealer_hand > 21:
             player_cash += bet * 2
@@ -149,6 +142,5 @@ basic_list = ["Dima", "12", "Andrey", "97", "Steve", "150"]
 if not file_check.exists():
     with open('Scoreboard.json', 'w') as f:
         json.dump(basic_list, f)
-
 
 menu()
