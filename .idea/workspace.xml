@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25bd1309-6525-4fbe-b433-7e8b4721e3eb" name="Changes" comment="">
+    <list default="true" id="25bd1309-6525-4fbe-b433-7e8b4721e3eb" name="Changes" comment="Little optimized and fixed code">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BlackJack/BlackJack.py" beforeDir="false" afterPath="$PROJECT_DIR$/BlackJack/BlackJack.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,6 +72,14 @@
       <option name="presentableId" value="Default" />
       <updated>1665771530497</updated>
     </task>
+    <task id="LOCAL-00001" summary="Little optimized and fixed code">
+      <created>1667923877544</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667923877544</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -85,6 +94,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Little optimized and fixed code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Little optimized and fixed code" />
   </component>
 </project>

@@ -48,7 +48,7 @@ def menu():
 
 def deck():
     decks_in_shuffle = random.randint(2, 8)
-    game_deck = ([2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11] * 4) * decks_in_shuffle
+    game_deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11] * 4 * decks_in_shuffle
     start_game_deck = game_deck.copy()
     for count in range(5):
         random.shuffle(game_deck)
